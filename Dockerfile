@@ -23,9 +23,12 @@ WORKDIR /app
 # Copy project
 COPY . /app
 
+# Create dummy Android SDK path (Roboelectric doesn't actually need it)
+RUN mkdir -p /opt/android-sdk
+
 # Make scripts executable (if they exist)
 RUN chmod +x /app/gradlew 2>/dev/null || true && \
     chmod +x /app/run-tests-do.sh 2>/dev/null || true
 
 # Default command: Run Roboelectric unit tests
-CMD ["./gradlew", "testDebugUnitTest", "--info"]
+CMD ["./gradlew", "testDebugUnitTest"]
