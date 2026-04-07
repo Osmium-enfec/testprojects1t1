@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  android-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: android-instrumentation-tests
+    environment:
+      - ANDROID_HOME=/opt/android-sdk
+      - ANDROID_SDK_ROOT=/opt/android-sdk
+    volumes:
+      - ./app:/app/app
+      - ./build:/app/build
+    ports:
+      - "5037:5037"  # ADB port
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+      - SYS_PTRACE
+    devices:
+      - /dev/kvm:/dev/kvm  # For KVM acceleration on Linux
+    command: /app/docker-run-tests.sh
+    healthcheck:
+      test: ["CMD", "adb", "devices"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
