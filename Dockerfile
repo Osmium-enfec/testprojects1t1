@@ -18,6 +18,18 @@ RUN mkdir -p /opt/gradle && \
     rm /tmp/gradle.zip && \
     ln -s /opt/gradle-8.5/bin/gradle /usr/local/bin/gradle
 
+# Download minimal Android SDK cmdline-tools (just for license acceptance, not used for Roboelectric)
+RUN mkdir -p /opt/android-sdk/cmdline-tools && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O /tmp/cmdline-tools.zip && \
+    unzip -q /tmp/cmdline-tools.zip -d /tmp && \
+    mv /tmp/cmdline-tools/* /opt/android-sdk/cmdline-tools/ && \
+    rm /tmp/cmdline-tools.zip
+
+# Accept licenses (required for build, even though Roboelectric doesn't use SDK)
+RUN mkdir -p /opt/android-sdk/licenses && \
+    echo "8933bad161af4d61" > /opt/android-sdk/licenses/android-sdk-license && \
+    echo "d56f5187479451eabf01fb78af6dfcb131b33910" >> /opt/android-sdk/licenses/android-sdk-license
+
 WORKDIR /app
 
 # Copy project
