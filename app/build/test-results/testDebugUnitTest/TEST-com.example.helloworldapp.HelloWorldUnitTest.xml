@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.helloworldapp.HelloWorldUnitTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-04-07T07:55:45.802Z" hostname="Divyanshus-MacBook-Pro.local" time="0.002">
+<testsuite name="com.example.helloworldapp.HelloWorldUnitTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-07T10:04:53" hostname="Divyanshus-MacBook-Pro.local" time="14.095">
   <properties/>
-  <testcase name="testHelloWorldString" classname="com.example.helloworldapp.HelloWorldUnitTest" time="0.001"/>
-  <testcase name="testStringNotEmpty" classname="com.example.helloworldapp.HelloWorldUnitTest" time="0.0"/>
-  <testcase name="testStringLength" classname="com.example.helloworldapp.HelloWorldUnitTest" time="0.0"/>
+  <testcase name="testHelloWorldString" classname="com.example.helloworldapp.HelloWorldUnitTest" time="14.07"/>
+  <testcase name="testStringNotEmpty" classname="com.example.helloworldapp.HelloWorldUnitTest" time="0.011"/>
+  <testcase name="testApplicationContext" classname="com.example.helloworldapp.HelloWorldUnitTest" time="0.007"/>
+  <testcase name="testStringLength" classname="com.example.helloworldapp.HelloWorldUnitTest" time="0.007"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

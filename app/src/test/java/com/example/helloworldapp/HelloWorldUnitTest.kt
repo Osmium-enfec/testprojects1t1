@@ -1,10 +1,12 @@
 package com.example.helloworldapp
 
-import androidx.test.core.app.ApplicationProvider
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
 class HelloWorldUnitTest {
@@ -29,7 +31,7 @@ class HelloWorldUnitTest {
     
     @Test
     fun testApplicationContext() {
-        val context = ApplicationProvider.getApplicationContext<android.content.Context>()
+        val context = RuntimeEnvironment.getApplication()
         assertNotNull(context)
         assertEquals("com.example.helloworldapp", context.packageName)
     }
