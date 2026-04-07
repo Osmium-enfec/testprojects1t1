@@ -1,7 +1,6 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive \
-    JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install only what's needed for Roboelectric unit tests (minimal footprint)
 RUN apt-get update && apt-get install -y \
@@ -10,6 +9,13 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Set JAVA_HOME to the actual OpenJDK 21 installation (find dynamically)
+RUN JAVA_HOME=$(find /usr/lib/jvm -type d -name "java-21*" | head -1) && \
+    echo "export JAVA_HOME=$JAVA_HOME" >> ~/.bashrc
+
+ENV PATH /opt/gradle-8.5/bin:/opt/android-sdk/cmdline-tools/bin:$PATH \
+    JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8"
 
 # Download Gradle (minimal install - no Android SDK needed for Roboelectric)
 RUN mkdir -p /opt/gradle && \
@@ -44,5 +50,5 @@ RUN mkdir -p /opt/android-sdk
 RUN chmod +x /app/gradlew 2>/dev/null || true && \
     chmod +x /app/run-tests-do.sh 2>/dev/null || true
 
-# Default command: Run Roboelectric unit tests
+# Default command: Run full Roboelectric unit tests with full build
 CMD ["./gradlew", "testDebugUnitTest"]
