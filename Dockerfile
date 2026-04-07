@@ -18,26 +18,6 @@ RUN mkdir -p /opt/gradle && \
     rm /tmp/gradle.zip && \
     ln -s /opt/gradle-8.5/bin/gradle /usr/local/bin/gradle
 
-# Accept licenses with yes command (proper way)
-RUN yes | sdkmanager --sdk_root=/opt/android-sdk --licenses
-
-# Install SDK components - one at a time with error output
-RUN echo "📦 Installing platforms;android-34..." && \
-    sdkmanager --sdk_root=/opt/android-sdk "platforms;android-34" || echo "⚠️ Warning: platforms may not install, continuing..."
-
-RUN echo "📦 Installing build-tools;34.0.0..." && \
-    sdkmanager --sdk_root=/opt/android-sdk "build-tools;34.0.0" || echo "⚠️ Warning: build-tools may not install, continuing..."
-
-RUN echo "📦 Installing platform-tools..." && \
-    sdkmanager --sdk_root=/opt/android-sdk "platform-tools" || echo "⚠️ Warning: platform-tools may not install, continuing..."
-
-RUN echo "📦 Installing system-images;android-34;default;x86_64..." && \
-    sdkmanager --sdk_root=/opt/android-sdk "system-images;android-34;default;x86_64" || echo "⚠️ Warning: system-images may not install, continuing..."
-
-RUN echo "📦 Installing emulator..." && \
-    sdkmanager --sdk_root=/opt/android-sdk "emulator" || echo "⚠️ Warning: emulator may not install, continuing..."
-
-
 WORKDIR /app
 
 # Copy project
