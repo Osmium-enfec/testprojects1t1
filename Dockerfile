@@ -25,10 +25,12 @@ RUN mkdir -p /opt/android-sdk/cmdline-tools && \
     mv /tmp/cmdline-tools/* /opt/android-sdk/cmdline-tools/ && \
     rm /tmp/cmdline-tools.zip
 
-# Accept licenses (required for build, even though Roboelectric doesn't use SDK)
+# Set PATH for sdkmanager
+ENV PATH=/opt/android-sdk/cmdline-tools/bin:$PATH
+
+# Accept licenses using sdkmanager
 RUN mkdir -p /opt/android-sdk/licenses && \
-    echo "8933bad161af4d61" > /opt/android-sdk/licenses/android-sdk-license && \
-    echo "d56f5187479451eabf01fb78af6dfcb131b33910" >> /opt/android-sdk/licenses/android-sdk-license
+    yes | sdkmanager --sdk_root=/opt/android-sdk --licenses 2>&1 | head -20
 
 WORKDIR /app
 
