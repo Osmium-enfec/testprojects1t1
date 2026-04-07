@@ -52,7 +52,7 @@ apt-get install -y \
   libxkbcommon0 \
   xvfb \
   qemu-kvm \
-  libvirt-bin \
+  libvirt-daemon \
   screen
 
 echo -e "${GREEN}✅ Dependencies installed${NC}"
